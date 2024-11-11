@@ -1,28 +1,11 @@
 # flake8: noqa
 import flet as ft
 import time
+from pathlib import Path
+from style import colors
+from test import test_screen
 
-colors = {
-    "DeepOrange": {
-        "200": "#FFDD2D",
-        "500": "#FFDD2D",
-        "700": "#FFDD2D",
-    },
-    "Dark": {
-        "background": "#000000",
-        "text": "#F2F4F7",
-        "card": "#313132",
-        "button": "#FFDD2D",
-        "bars": "#9299A2"
-    },
-    "Light": {
-        "background": "#F2F4F7",
-        "text": "#000000",
-        "card": "#FFFFFF",
-        "button": "#FFDD2D",
-        "bars": "#9299A2"
-    }
-}
+BASE_DIR = Path(__file__).parent.resolve()
 
 
 def main(page: ft.Page):
@@ -37,7 +20,7 @@ def main(page: ft.Page):
         content=ft.Column(
             controls=[
                 ft.Image(
-                    src="/Users/chuvaevnikita/Dev/python/t-education/logo.png",
+                    src=f"{BASE_DIR}/static/logo.png",
                     width=550, height=600),
             ],
             alignment=ft.MainAxisAlignment.CENTER,
@@ -85,7 +68,7 @@ def main(page: ft.Page):
                             ),
                             ft.Container(
                                 content=ft.Image(
-                                    src="/Users/chuvaevnikita/Dev/python/t-education/1.webp",
+                                    src=f"{BASE_DIR}/static/1.webp",
                                     fit=ft.ImageFit.COVER
                                 ),
                                 width=175,
@@ -99,7 +82,7 @@ def main(page: ft.Page):
                     ),
                     elevation=5,
                     width=375,
-                    height=200,
+                    height=150,
                     animate_size=True,
                 )
 
@@ -111,27 +94,27 @@ def main(page: ft.Page):
         height=page.window.height - 130
     )
 
-    test_screen = ft.Container(
-        content=ft.Column(
-            controls=[
-                ft.Row(
-                    controls=[ft.Text(
-                        "Тестовый экран", size=24, weight=ft.FontWeight.BOLD, color=theme["text"])],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    spacing=10
-                ),
-                ft.Text(
-                    "Здесь может быть ваш контент для тестового экрана.", color=theme["text"]),
-                ft.Image(
-                    src="/Users/chuvaevnikita/Dev/python/t-education/bigboss.jpg",
-                    width=550, height=500),
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=10,
-        ),
-        bgcolor=theme["background"],
-        height=page.window.height - 130
-    )
+    # test_screen = ft.Container(
+    #     content=ft.Column(
+    #         controls=[
+    #             ft.Row(
+    #                 controls=[ft.Text(
+    #                     "Тестовый экран", size=24, weight=ft.FontWeight.BOLD, color=theme["text"])],
+    #                 alignment=ft.MainAxisAlignment.CENTER,
+    #                 spacing=10
+    #             ),
+    #             ft.Text(
+    #                 "Здесь может быть ваш контент для тестового экрана.", color=theme["text"]),
+    #             ft.Image(
+    #                 src=f"{BASE_DIR}/static/bigboss.jpg",
+    #                 width=550, height=500),
+    #         ],
+    #         alignment=ft.MainAxisAlignment.START,
+    #         spacing=10,
+    #     ),
+    #     bgcolor=theme["background"],
+    #     height=page.window.height - 130
+    # )
 
     def show_screen(screen):
         page.controls.clear()
@@ -174,7 +157,7 @@ def main(page: ft.Page):
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 ),
             ],
-            alignment=ft.MainAxisAlignment.SPACE_EVENLY,  
+            alignment=ft.MainAxisAlignment.SPACE_EVENLY,
             spacing=50,
         ),
         height=70,
