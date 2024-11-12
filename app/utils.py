@@ -150,5 +150,6 @@ controls_for_index = [
         f"{BASE_DIR}/static/1.webp"
     ),
     # TODO: перенести карточки с картинками
+    # я сделала
 ]
 
