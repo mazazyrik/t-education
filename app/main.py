@@ -1,47 +1,10 @@
 # flake8: noqa
 import flet as ft
 import time
+
 from style import colors
 from config import BASE_DIR
-from test import list_view_content
-
-def create_card(title, description, image_src):
-    return ft.Card(
-        content=ft.Row(
-            controls=[
-                ft.Container(
-                    content=ft.Column(
-                        controls=[
-                            ft.Text(title, size=15, weight="bold",
-                                    color=colors['Dark']["text"], text_align=ft.TextAlign.LEFT),
-                            ft.Text(
-                                description,
-                                color=colors['Dark']["text"], text_align=ft.TextAlign.LEFT, size=13
-                            ),
-                        ],
-                        alignment=ft.MainAxisAlignment.START,
-                        spacing=5,
-                    ),
-                    padding=10,
-                ),
-                ft.Container(
-                    content=ft.Image(
-                        src=image_src,
-                        fit=ft.ImageFit.COVER
-                    ),
-                    width=175,
-                    height=100,
-                    padding=10,
-                    clip_behavior=ft.ClipBehavior.ANTI_ALIAS
-                )
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=10,
-        ),
-        elevation=5,
-        height=150,
-        animate_size=True,
-    )
+from pages import list_view_index, list_view_content, test_screen_content
 
 
 def main(page: ft.Page):
@@ -63,71 +26,23 @@ def main(page: ft.Page):
             spacing=20
         ),
         bgcolor=theme["background"],
-        height=page.window.height - 100
     )
 
     main_screen = ft.Container(
-        content=ft.Column(
-            controls=[
-                ft.Row(
-                    controls=[
-                        ft.Text("Т-Образование", size=24,
-                                weight=ft.FontWeight.BOLD, color=theme["text"])
-                    ],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    spacing=10
-                ),
-                ft.Text(
-                    "Бесплатные образовательные программы для школьников, студентов и ИТ-специалистов",
-                    color=theme["text"],
-                    text_align=ft.TextAlign.CENTER
-                ),
-                ft.ListView(
-                    controls=[
-                        create_card(
-                            "Т‑Банк Финтех",
-                            "Образовательные ИТ-курсы от топ-менеджеров, техлидов и ведущих специалистов Т‑Банка",
-                            f"{BASE_DIR}/static/1.webp"
-                        ),
-                     ],
-                    spacing=10,  
-                    padding=10,  
-                )
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=20,
-        ),
+        content=list_view_index,
         bgcolor=theme["background"],
-        height=page.window.height - 130,
+        expand=True
     )
 
     test_screen = ft.Container(
-        content=ft.Column(
-            controls=[
-                ft.Row(
-                    controls=[ft.Text(
-                        "Тестовый экран", size=24, weight=ft.FontWeight.BOLD, color=theme["text"])],
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    spacing=10
-                ),
-                ft.Text(
-                    "Здесь может быть ваш контент для тестового экрана.", color=theme["text"]),
-                ft.Image(
-                    src=f"{BASE_DIR}/static/bigboss.jpg",
-                    width=550, height=500),
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=10,
-        ),
-        bgcolor=theme["background"],
-        height=page.window.height - 130
+        content=test_screen_content,
+        expand=True
     )
 
     def show_screen(screen):
         page.controls.clear()
         page.add(screen)
         page.add(bottom_nav)
-        page.add(list_view_content)
         page.update()
 
         for i in range(0, 101, 5):
@@ -141,6 +56,8 @@ def main(page: ft.Page):
         elif selected_index == 1:
             show_screen(test_screen)
         elif selected_index == 2:
+            page.add(list_view_content)
+            page.update()
             show_screen(list_view_content)
 
     bottom_nav = ft.Container(
@@ -160,8 +77,7 @@ def main(page: ft.Page):
                     controls=[
                         ft.IconButton(
                             ft.icons.QUESTION_ANSWER, on_click=lambda e: on_navigation_change(2), icon_size=24),
-                        ft.Text("Тест", size=12,
-                                color=colors["Dark"]["text"]),
+                        ft.Text("Тест", size=12, color=colors["Dark"]["text"]),
                     ],
                     alignment=ft.MainAxisAlignment.CENTER,
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
