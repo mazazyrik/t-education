@@ -155,30 +155,36 @@ controls_for_index = [
         "Т‑Банк Финтех",
         "Образовательные ИТ-курсы от топ-менеджеров, техлидов и ведущих специалистов Т‑Банка",
         f"{BASE_DIR}/static/1.webp",
+        'https://education.tbank.ru/study/fintech/'
     ),
     create_card_for_index(
         "Т‑Банк Старт",
         "Оплачиваемые стажировки в сфере ИТ",
-        f"{BASE_DIR}/static/2.webp"
+        f"{BASE_DIR}/static/2.webp",
+        'https://education.tbank.ru/start/'
     ),
     create_card_for_index(
         "Т-банк Академия",
         "Образовательные проекты в вузах России",
-        f"{BASE_DIR}/static/3.webp"
+        f"{BASE_DIR}/static/3.webp",
+        'https://education.tbank.ru/academy/'
     ),
     create_card_for_index(
         "Talents at T-Bank",
         "Ускоренный карьерный рост для тех, кто недавно работает в Т-Банке",
-        f"{BASE_DIR}/static/4.webp"
+        f"{BASE_DIR}/static/4.webp",
+        'https://www.tbank.ru/career/it/talents/'
     ),
     create_card_for_index(
         "Стипендия",
         "Поддерживаем талантливых студентов со всей России",
-        f"{BASE_DIR}/static/5.webp"
+        f"{BASE_DIR}/static/5.webp",
+        'https://education.tbank.ru/scholarship/'
     ),
     create_card_for_index(
         "Программы в Сириусе",
         "Бесплатные образовательные программы на федеральной территории «Сириус» для студентов",
-        f"{BASE_DIR}/static/6.webp"
+        f"{BASE_DIR}/static/6.webp",
+        'https://education.tbank.ru/activities/sirius/'
     ),
 ]
