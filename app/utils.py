@@ -47,11 +47,11 @@ for question in questions:
                     content=ft.Column(
                         controls=[
                             ft.Text(
-                                question["question"], size=16, weight=ft.FontWeight.BOLD, color="#FFDD2D"),
+                                question["question"], size=16, weight=ft.FontWeight.BOLD, color=colors['Dark']['text']),
                             ft.RadioGroup(
                                 content=ft.Column(
                                     controls=[
-                                        ft.Radio(value=option, label=option)
+                                        ft.Radio(value=option, label=option, )
                                         for option in question["options"]
                                     ]
                                 ),
@@ -60,6 +60,7 @@ for question in questions:
                         ],
                         alignment=ft.MainAxisAlignment.START,
                         spacing=10,
+                        
                     ),
                     padding=10,
                     expand=True
