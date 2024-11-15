@@ -106,7 +106,13 @@ def create_card(title, description, image_src):
     )
 
 
-def create_card_for_index(title, description, image_path):
+def create_card_for_index(title, description, image_path, link=None):
+    button = ft.ElevatedButton(
+        text="Подробнее",
+        url=link,
+        visible=link is not None
+    )
+
     return ft.Container(
         content=ft.Row(
             controls=[
@@ -119,12 +125,13 @@ def create_card_for_index(title, description, image_path):
                     content=ft.Column(
                         controls=[
                             ft.Text(title, size=20,
-                                    weight=ft.FontWeight.BOLD, max_lines=1),
-                            ft.Text(description, max_lines=3)
+                                    weight=ft.FontWeight.BOLD, max_lines=2),
+                            ft.Text(description, max_lines=6),
+                            button
                         ]
                     ),
                     expand=True,
-                )
+                ),
             ],
             spacing=10,
             expand=True
@@ -142,12 +149,12 @@ controls_for_index = [
     ft.Text(
         "Бесплатные образовательные программы для школьников, студентов и ИТ-специалистов",
         color=colors["Dark"]["text"],
-        text_align=ft.TextAlign.CENTER
+        text_align=ft.TextAlign.CENTER,
     ),
     create_card_for_index(
         "Т‑Банк Финтех",
         "Образовательные ИТ-курсы от топ-менеджеров, техлидов и ведущих специалистов Т‑Банка",
-        f"{BASE_DIR}/static/1.webp"
+        f"{BASE_DIR}/static/1.webp",
     ),
     create_card_for_index(
         "Т‑Банк Старт",
@@ -175,4 +182,3 @@ controls_for_index = [
         f"{BASE_DIR}/static/6.webp"
     ),
 ]
-
