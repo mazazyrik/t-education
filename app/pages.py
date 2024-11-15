@@ -90,7 +90,7 @@ class Course:
                     color=colors["Dark"]["text"]),
                 ft.Image(
                     src=f"{BASE_DIR}/static/ad.png",
-                    width=400, height=400),
+                    width=500, height=550, ),
             ],
             alignment=ft.MainAxisAlignment.START,
             expand=True
