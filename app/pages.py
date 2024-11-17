@@ -8,14 +8,14 @@ from texts import first_class
 
 list_view_content = ft.ListView(
     controls=[
-        ft.Text("Тест", size=24, weight=ft.FontWeight.BOLD, color="#FFDD2D"),
+        ft.Text("Тест на профориентацию", size=24, weight=ft.FontWeight.BOLD, color=colors['Dark']['text']),
         *controls,
         ft.Container(
             content=ft.Row(
                 controls=[
                     ft.Container(
                         content=ft.Text(
-                            "Далее", size=16, weight=ft.FontWeight.BOLD, color="#FFDD2D"),
+                            "Далее", size=16, weight=ft.FontWeight.BOLD, color=colors['Dark']['text']),
                         alignment=ft.alignment.center,
                         bgcolor="#313132",
                         width=100,
@@ -90,7 +90,7 @@ class Course:
                     color=colors["Dark"]["text"]),
                 ft.Image(
                     src=f"{BASE_DIR}/static/ad.png",
-                    width=400, height=400),
+                    width=500, height=550, ),
             ],
             alignment=ft.MainAxisAlignment.START,
             expand=True

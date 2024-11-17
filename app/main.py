@@ -14,8 +14,8 @@ import time
 class MainApp:
     def __init__(self, page: ft.Page):
         self.page = page
-        self.page.window.width = 400
-        self.page.window.height = 700
+        self.page.window.width = 500
+        self.page.window.height = 800
         self.page.title = "T-Education"
         self.page.bgcolor = ft.colors.BLACK
 
@@ -52,6 +52,7 @@ class MainApp:
             bgcolor=self.theme["background"],
             expand=True
         )
+
     def create_course_screen(self):
         return ft.Container(
             content=Course.first_page(),
@@ -69,44 +70,84 @@ class MainApp:
         return ft.Container(
             content=ft.Row(
                 controls=[
-                    ft.Column(
+                    ft.Row(
                         controls=[
-                            ft.IconButton(
-                                ft.icons.HOME, on_click=lambda e: self.on_navigation_change(0), icon_size=24),
-                            ft.Text("Главная", size=12,
-                                    color=self.theme["text"]),
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/home.svg", width=33, height=33,
+                                        ),
+                                        # ft.Text("Главная", size=12, color=self.theme["text"]),
+                                    ],
+                                    spacing=5,
+                                    alignment=ft.MainAxisAlignment.CENTER,  # Центрируем содержимое колонки
+                                ),
+                                padding=5,
+                                # alignment=ft.MainAxisAlignment.CENTER,  # Центрируем контейнер
+                                on_click=lambda e: self.on_navigation_change(
+                                    0),
+                            )
                         ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        # alignment=ft.MainAxisAlignment.CENTER,  # Центрируем ряд
                     ),
-                    ft.Column(
+
+                    ft.Row(
                         controls=[
-                            ft.IconButton(
-                                ft.icons.QUESTION_ANSWER, on_click=lambda e: self.on_navigation_change(2), icon_size=24),
-                            ft.Text("Тест", size=12, color=self.theme["text"]),
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/test.svg", width=33, height=33,
+                                        ),
+                                        # ft.Text("Тест", size=12, color=self.theme["text"]),
+                                    ],
+                                    alignment=ft.MainAxisAlignment.CENTER,
+                                    spacing=5,
+                                ),
+                                padding=5,
+                                on_click=lambda e: self.on_navigation_change(
+                                    2),
+                            )
+                        ]
                     ),
-                    ft.Column(
+                    ft.Row(
                         controls=[
-                            ft.IconButton(
-                                ft.icons.PLAY_ARROW, on_click=lambda e: self.on_navigation_change(3), icon_size=24),
-                            ft.Text("Демо курс", size=12,
-                                    color=self.theme["text"]),
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/course.svg", width=38, height=38,
+                                        ),
+                                        # ft.Text("Демо курс", size=12, color=self.theme["text"]),
+                                    ],
+                                    alignment=ft.MainAxisAlignment.CENTER,
+                                    spacing=5,
+                                ),
+                                padding=5,
+                                on_click=lambda e: self.on_navigation_change(
+                                    3),
+                            )
+                        ]
                     ),
-                    ft.Column(
+                    ft.Row(
                         controls=[
-                            ft.IconButton(
-                                ft.icons.INFO, on_click=lambda e: self.on_navigation_change(1), icon_size=24),
-                            ft.Text("Информация", size=12,
-                                    color=self.theme["text"]),
-                        ],
-                        alignment=ft.MainAxisAlignment.CENTER,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/info.svg", width=33, height=33,
+                                        ),
+                                        # ft.Text("Информация", size=12, color=self.theme["text"]),
+                                    ],
+                                    alignment=ft.MainAxisAlignment.CENTER,
+                                    spacing=5,
+                                ),
+                                padding=5,
+                                on_click=lambda e: self.on_navigation_change(
+                                    1),
+                            )
+                        ]
                     ),
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY,
