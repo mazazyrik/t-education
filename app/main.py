@@ -86,15 +86,15 @@ class MainApp:
                                         # ft.Text("Главная", size=12, color=self.theme["text"]),
                                     ],
                                     spacing=5,
-                                    alignment=ft.MainAxisAlignment.CENTER,  # Центрируем содержимое колонки
+                                    alignment=ft.MainAxisAlignment.CENTER,  
                                 ),
                                 padding=5,
-                                # alignment=ft.MainAxisAlignment.CENTER,  # Центрируем контейнер
+                                # alignment=ft.MainAxisAlignment.CENTER,  
                                 on_click=lambda e: self.on_navigation_change(
                                     0),
                             )
                         ],
-                        # alignment=ft.MainAxisAlignment.CENTER,  # Центрируем ряд
+                        # alignment=ft.MainAxisAlignment.CENTER,  
                     ),
 
                     ft.Row(
