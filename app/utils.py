@@ -2,136 +2,13 @@
 import flet as ft
 from config import BASE_DIR
 from style import colors
-questions = [
-    {
-        "question": "Кто вы?",
-        "options": ["Школьник", "Студент", "У меня уже есть профессия, хочу освоить что-то новое"]
-    },
-    {
-        "question": "Вам больше нравится…",
-        "options": ["заниматься творчеством", "анализировать, работать с цифрами", "создавать что-то новое, инновационное"]
-    },
-    {
-        "question": "Вам больше нравится…",
-        "options": ["искать креативный подход к решению проблемы", "решать задачи известным, проверенным способом", "использовать технологичные способы решения"]
-    },
-    {
-        "question": "Вам…",
-        "options": ["нравится работать в команде", "комфортнее действовать в одиночку", "по душе как групповая работа, так и индивидуальная"]
-    },
-    {
-        "question": "Как вы относитесь к проектной работе?",
-        "options": ["Мне нравится работать над проектами", "Я предпочитаю другую форму работы", "Мне всё равно, я комфортно себя чувствую при любой форме работы"]
-    },
-    {
-        "question": "Что вам ближе?",
-        "options": ["Работа с алгоритмами", "Работа с цифрами", "Работа с финансовыми показателями"]
-    },
-    {
-        "question": "Ваша цель –",
-        "options": ["Начать развиваться в IT сфере", "Подготовиться к олимпиаде", "Лучше разбираться в школьной программе"]
-    },
-    {
-        "question": "Что вам ближе?",
-        "options": ["Работа с алгоритмами", "Работа с цифрами"]
-    }
-]
-
-controls = []
-
-for question in questions:
-    question_card = ft.Card(
-        content=ft.Row(
-            controls=[
-                ft.Container(
-                    content=ft.Column(
-                        controls=[
-                            ft.Text(
-                                question["question"], size=16, weight=ft.FontWeight.BOLD, color=colors['Dark']['text']),
-                            ft.RadioGroup(
-                                content=ft.Column(
-                                    controls=[
-                                        ft.Radio(value=option, label=option, )
-                                        for option in question["options"]
-                                    ]
-                                ),
-                                on_change=lambda e: print(e.control.value)
-                            )
-                        ],
-                        alignment=ft.MainAxisAlignment.START,
-                        spacing=10,
-                        
-                    ),
-                    padding=10,
-                    expand=True
-                ),
-                ft.Container(
-                    content=ft.Image(
-                        src=f"{BASE_DIR}/static/question_image.png",
-                        fit=ft.ImageFit.COVER
-                    ),
-                    width=100,
-                    height=100,
-                    padding=10,
-                    clip_behavior=ft.ClipBehavior.ANTI_ALIAS
-                )
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=10,
-        ),
-        elevation=5,
-        width=None,
-        height=None,
-        animate_size=True,
-    )
-
-    controls.append(question_card)
-
-
-def create_card(title, description, image_src):
-    return ft.Card(
-        content=ft.Row(
-            controls=[
-                ft.Container(
-                    content=ft.Column(
-                        controls=[
-                            ft.Text(title, size=15, weight="bold",
-                                    color=colors['Dark']["text"], text_align=ft.TextAlign.LEFT),
-                            ft.Text(
-                                description,
-                                color=colors['Dark']["text"], text_align=ft.TextAlign.LEFT, size=13
-                            ),
-                        ],
-                        alignment=ft.MainAxisAlignment.START,
-                        spacing=5,
-                    ),
-                    padding=10,
-                ),
-                ft.Container(
-                    content=ft.Image(
-                        src=image_src,
-                        fit=ft.ImageFit.COVER
-                    ),
-                    width=175,
-                    height=100,
-                    padding=10,
-                    clip_behavior=ft.ClipBehavior.ANTI_ALIAS
-                )
-            ],
-            alignment=ft.MainAxisAlignment.START,
-            spacing=10,
-        ),
-        elevation=5,
-        height=150,
-        animate_size=True,
-    )
 
 
 def create_card_for_index(title, description, image_path, link=None):
     button = ft.ElevatedButton(
         text="Подробнее",
         url=link,
-        visible=link is not None
+        visible=link is not None,
     )
 
     return ft.Container(
@@ -145,9 +22,11 @@ def create_card_for_index(title, description, image_path, link=None):
                 ft.Container(
                     content=ft.Column(
                         controls=[
-                            ft.Text(title, size=20,
-                                    weight=ft.FontWeight.BOLD, max_lines=2),
-                            ft.Text(description, max_lines=6),
+                            ft.Text(title, size=25,
+                                    weight=ft.FontWeight.BOLD, max_lines=2,
+                                    font_family='Tinkoff Sans Bold'),
+                            ft.Text(description, max_lines=6, size=15,
+                                    font_family='Tinkoff Sans Regular'),
                             button
                         ]
                     ),
@@ -165,12 +44,14 @@ def create_card_for_index(title, description, image_path, link=None):
 
 
 controls_for_index = [
-    ft.Text("Т-Образование", size=24, weight=ft.FontWeight.BOLD,
-            color=colors["Dark"]["text"], text_align=ft.TextAlign.CENTER),
+    ft.Text("Т-Образование", size=26, weight=ft.FontWeight.BOLD,
+            color=colors["Dark"]["text"], text_align=ft.TextAlign.CENTER, font_family='Tinkoff Sans Bold'),
     ft.Text(
         "Бесплатные образовательные программы для школьников, студентов и ИТ-специалистов",
         color=colors["Dark"]["text"],
         text_align=ft.TextAlign.CENTER,
+        font_family='Tinkoff Sans Medium',
+        size=20
     ),
     create_card_for_index(
         "Т‑Банк Финтех",

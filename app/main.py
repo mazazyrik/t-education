@@ -3,8 +3,8 @@ import flet as ft
 import time
 
 from style import colors
-from config import BASE_DIR
-from pages import list_view_index, list_view_content, test_screen_content, Course
+from config import BASE_DIR, questions
+from pages import Test, list_view_index, test_screen_content, Course
 
 
 import flet as ft
@@ -18,6 +18,11 @@ class MainApp:
         self.page.window.height = 800
         self.page.title = "T-Education"
         self.page.bgcolor = ft.colors.BLACK
+        self.page.fonts = {
+            "Tinkoff Sans Bold": f"{BASE_DIR}/fonts/TinkoffSans-Bold.ttf",
+            "Tinkoff Sans Regular": f"{BASE_DIR}/fonts/TinkoffSans-Regular.ttf",
+            "Tinkoff Sans Medium": f"{BASE_DIR}/fonts/TinkoffSans-Medium.ttf",
+        }
 
         self.theme = colors["Dark"]
         self.loading_screen = self.create_loading_screen()
@@ -55,7 +60,7 @@ class MainApp:
 
     def create_course_screen(self):
         return ft.Container(
-            content=Course.first_page(),
+            content=Course.first_page(self.navigate_to),
             bgcolor=self.theme['background'],
             expand=True
         )
@@ -158,7 +163,14 @@ class MainApp:
             border_radius=8,
         )
 
+    def navigate_to(self, new_page):
+        self.page.controls.clear()
+        self.page.add(new_page)
+        self.page.add(self.bottom_nav)
+        self.page.update()
+
     def show_screen(self, screen):
+        self.page.add(Course.first_page(self.navigate_to))
         self.page.controls.clear()
         self.page.add(screen)
         self.page.add(self.bottom_nav)
@@ -175,9 +187,9 @@ class MainApp:
         elif selected_index == 1:
             self.show_screen(self.test_screen)
         elif selected_index == 2:
-            self.page.add(list_view_content)
+            self.page.add(Test(questions).second_page(self.navigate_to))
             self.page.update()
-            self.show_screen(list_view_content)
+            self.show_screen(Test(questions).second_page(self.navigate_to))
         elif selected_index == 3:
             self.show_screen(self.course_screen)
 
