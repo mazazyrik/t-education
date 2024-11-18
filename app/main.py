@@ -167,6 +167,7 @@ class MainApp:
 
     def show_screen(self, screen):
         self.page.add(Course.first_page(self.navigate_to))
+        self.page.add(Test(questions).next_question(self.navigate_to))
         self.page.controls.clear()
         self.page.add(screen)
         self.page.add(self.bottom_nav)

@@ -90,3 +90,43 @@ controls_for_index = [
         'https://education.tbank.ru/activities/sirius/'
     ),
 ]
+
+
+courses_list = [
+    create_card_for_index(
+        "Т-Банк Финтех",
+        "Образовательные ИТ-курсы от топ-менеджеров, техлидов и ведущих специалистов Т－Банка",
+        f"{BASE_DIR}/static/1.webp",
+        'https://education.tbank.ru/study/fintech/'
+    ),
+    create_card_for_index(
+        "Android для начинающих",
+        "Бесплатный курс для будущих разработчиков",
+        f"{BASE_DIR}/static/android.webp",
+        'https://education.tbank.ru/school/basic/android/'
+    ),
+    create_card_for_index(
+        "IOS для начинающих",
+        "Бесплатный курс для всех желающих попробовать себя в создании мобильных приложений",
+        f"{BASE_DIR}/static/ios.webp",
+        'https://education.tbank.ru/school/basic/ios/'
+    ),
+    create_card_for_index(
+        "Анализ данных",
+        "Знакомство с основами анализа данных и современными инструментами аналитики",
+        f"{BASE_DIR}/static/ad.png",
+        'https://education.tbank.ru/school/basic/analysis/'
+    ),
+    create_card_for_index(
+        "Информатика решает",
+        "Бесплатный онлайн-курс для школьников 7—11 классов",
+        f"{BASE_DIR}/static/inf.webp",
+        'https://education.tbank.ru/school/basic/programming/'
+    ),
+    create_card_for_index(
+        "Математика решает",
+        "Бесплатный онлайн-курс для школьников 4—6 классов",
+        f"{BASE_DIR}/static/math.webp",
+        'https://education.tbank.ru/school/basic/math/'
+    ),
+]

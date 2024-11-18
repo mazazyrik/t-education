@@ -3,7 +3,7 @@ import flet as ft
 from config import BASE_DIR
 from config import questions as qs
 from style import colors
-from utils import controls_for_index
+from utils import controls_for_index, courses_list
 from texts import first_class
 
 
@@ -47,8 +47,37 @@ class Test:
         self.current_question_index = 0
         self.questions = questions
 
-    def second_page(self, navigate_to: callable = None) -> ft.Column:
+    def what_course(self):
+        if 'Школьник' in self.answers:
+            if 'заниматься творчеством' in self.answers:
+                return [
+                    courses_list[4], courses_list[5]
+                ]
+            elif 'анализировать, работать с цифрами' in self.answers:
+                return [
+                    courses_list[3], courses_list[5]
+                ]
+            else:
+                return [
+                    courses_list[3], courses_list[5], courses_list[4]
+                ]
+        elif 'Студент' or 'У меня уже есть профессия, хочу освоить что-то новое' in self.answers:
+            if 'анализировать, работать с цифрами' in self.answers:
+                return [courses_list[3]]
+            elif 'заниматься творчеством' in self.answers:
+                return [courses_list[1], courses_list[2]]
+            elif 'использовать технологичные способы решения' in self.answers:
+                return [courses_list[0], courses_list[1], courses_list[2]]
+            else:
+                return [
+                    courses_list[0], courses_list[1], courses_list[3]
+                ]
+        else:
+            return [
+                courses_list[0], courses_list[1], courses_list[2], courses_list[3], courses_list[4], courses_list[5]
+            ]
 
+    def second_page(self, navigate_to: callable = None) -> ft.Column:
         return ft.ListView(
             controls=[
                 ft.Text("Тест на профориентацию", size=26,
@@ -77,7 +106,7 @@ class Test:
                         )
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
-                ) 
+                )
             ],
             expand=True
         )
@@ -145,14 +174,14 @@ class Test:
                     icon=ft.icons.ARROW_BACK,
                     tooltip="Назад",
                     on_click=lambda e: navigate_to(
-                                self.previous_question(navigate_to)),
+                        self.previous_question(navigate_to)),
                 ),
                 ft.IconButton(
                     icon=ft.icons.NAVIGATE_NEXT,
                     tooltip="Далее",
                     on_click=lambda e: navigate_to(
-                                self.next_question(navigate_to)),
-                        
+                        self.next_question(navigate_to)),
+
                 ),
             ],
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -166,6 +195,40 @@ class Test:
             expand=True
         )
 
+    def create_result_page(self, navigate_to: callable = None):
+        return ft.ListView(
+            controls=[
+                ft.Container(
+                    content=ft.Column(
+                        controls=[
+                            ft.Text(
+                                "Результаты теста", size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                                font_family='Tinkoff Sans Bold'
+                            ),
+                            ft.Text(
+                                f"Больше всего вам подходят:", size=20, color=colors["Dark"]["text"],
+                                font_family='Tinkoff Sans Medium'
+                            ),
+                            *self.what_course(),
+                            ft.Row(
+                                controls=[
+                                    ft.ElevatedButton(
+                                        text="Перейти к курсам",
+                                        on_click=lambda e: navigate_to(
+                                            Course.first_page(navigate_to)),
+                                    )
+                                ],
+                                alignment=ft.MainAxisAlignment.CENTER
+                            ),
+                        ],
+                        alignment=ft.MainAxisAlignment.CENTER,
+                        spacing=20,
+                    ),
+                    bgcolor=colors["Dark"]["background"],
+                )
+            ], expand=True
+        )
+
     def save_answer(self, answer):
         if self.current_question_index < len(self.questions):
             if len(self.answers) <= self.current_question_index:
@@ -177,6 +240,8 @@ class Test:
         if self.current_question_index < len(self.questions) - 1:
             self.current_question_index += 1
             return self.create_question_page(navigate_to)
+        elif self.current_question_index == len(self.questions) - 1:
+            return self.create_result_page(navigate_to)
 
     def previous_question(self, navigate_to: callable):
         if self.current_question_index > 0:
@@ -215,7 +280,8 @@ class Course:
                         ft.IconButton(
                             icon=ft.icons.NAVIGATE_NEXT,
                             tooltip="Далее",
-                            on_click=lambda e: navigate_to('next_page')
+                            on_click=lambda e: navigate_to(
+                                Course.third_page(navigate_to))
                         ),
                     ],
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -265,4 +331,35 @@ class Course:
             expand=True
         )
 
+        return page
+
+    @staticmethod
+    def third_page(navigate_to: callable) -> ft.Column:
+        page = ft.Column(
+            controls=[
+                ft.Text(
+                    'В демо версии приложения недостпунен плеер', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Image(
+                            src=f"{BASE_DIR}/static/vid.png",
+                            width=450, height=200
+                        ),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                ),
+                ft.Row(
+                    controls=[
+                        ft.ElevatedButton(
+                            text="Вернуться в начало",
+                            on_click=lambda e: navigate_to(
+                                Course.first_page(navigate_to))
+                        )
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                )
+            ], expand=True
+        )
         return page
