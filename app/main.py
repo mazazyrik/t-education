@@ -7,10 +7,6 @@ from config import BASE_DIR, questions
 from pages import Test, list_view_index, test_screen_content, Course
 
 
-import flet as ft
-import time
-
-
 class MainApp:
     def __init__(self, page: ft.Page):
         self.page = page
@@ -86,15 +82,15 @@ class MainApp:
                                         # ft.Text("Главная", size=12, color=self.theme["text"]),
                                     ],
                                     spacing=5,
-                                    alignment=ft.MainAxisAlignment.CENTER,  
+                                    alignment=ft.MainAxisAlignment.CENTER,
                                 ),
                                 padding=5,
-                                # alignment=ft.MainAxisAlignment.CENTER,  
+                                # alignment=ft.MainAxisAlignment.CENTER,
                                 on_click=lambda e: self.on_navigation_change(
                                     0),
                             )
                         ],
-                        # alignment=ft.MainAxisAlignment.CENTER,  
+                        # alignment=ft.MainAxisAlignment.CENTER,
                     ),
 
                     ft.Row(
@@ -171,6 +167,7 @@ class MainApp:
 
     def show_screen(self, screen):
         self.page.add(Course.first_page(self.navigate_to))
+        self.page.add(Test(questions).next_question(self.navigate_to))
         self.page.controls.clear()
         self.page.add(screen)
         self.page.add(self.bottom_nav)
