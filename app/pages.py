@@ -338,7 +338,7 @@ class Course:
         page = ft.Column(
             controls=[
                 ft.Text(
-                    'В демо версии приложения недостпунен плеер', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    'В демо версии приложения недоступен плеер', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
                     font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER
                 ),
                 ft.Row(
