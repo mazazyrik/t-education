@@ -4,7 +4,7 @@ import time
 
 from style import colors
 from config import BASE_DIR, questions
-from pages import Test, list_view_index, test_screen_content, Course
+from pages import Prizes, Test, list_view_index, test_screen_content, Course
 
 
 class MainApp:
@@ -26,6 +26,7 @@ class MainApp:
         self.test_screen = self.create_test_screen()
         self.bottom_nav = self.create_bottom_nav()
         self.course_screen = self.create_course_screen()
+        self.prizes_screen = self.create_prizes_screen()
 
         self.page.add(self.loading_screen)
         self.page.update()
@@ -64,6 +65,13 @@ class MainApp:
     def create_test_screen(self):
         return ft.Container(
             content=test_screen_content,
+            expand=True
+        )
+
+    def create_prizes_screen(self):
+        return ft.Container(
+            content=Prizes.first_page(self.navigate_to),
+            bgcolor=self.theme['background'],
             expand=True
         )
 
@@ -137,7 +145,26 @@ class MainApp:
                                 content=ft.Column(
                                     controls=[
                                         ft.Image(
-                                            src=f"{BASE_DIR}/static/info.svg", width=33, height=33,
+                                            src=f"{BASE_DIR}/static/prize_icon.png", width=33, height=33,
+                                        ),
+                                        # ft.Text("Информация", size=12, color=self.theme["text"]),
+                                    ],
+                                    alignment=ft.MainAxisAlignment.CENTER,
+                                    spacing=5,
+                                ),
+                                padding=5,
+                                on_click=lambda e: self.on_navigation_change(
+                                    4),
+                            )
+                        ]
+                    ),
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/info.svg", width=34, height=34,
                                         ),
                                         # ft.Text("Информация", size=12, color=self.theme["text"]),
                                     ],
@@ -168,6 +195,7 @@ class MainApp:
     def show_screen(self, screen):
         self.page.add(Course.first_page(self.navigate_to))
         self.page.add(Test(questions).next_question(self.navigate_to))
+        self.page.add(Prizes.first_page(self.navigate_to))
         self.page.controls.clear()
         self.page.add(screen)
         self.page.add(self.bottom_nav)
@@ -189,6 +217,8 @@ class MainApp:
             self.show_screen(Test(questions).second_page(self.navigate_to))
         elif selected_index == 3:
             self.show_screen(self.course_screen)
+        elif selected_index == 4:
+            self.show_screen(self.prizes_screen)
 
 
 def main(page: ft.Page):
