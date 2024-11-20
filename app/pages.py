@@ -7,11 +7,14 @@ from utils import controls_for_index, courses_list
 from texts import first_class
 
 
+# TODO: везде сделать паддинг сверху
+
 list_view_index = ft.ListView(
     controls=[
         *controls_for_index,
     ],
     expand=True,
+    spacing=20
 
 )
 test_screen_content = ft.Column(
@@ -37,7 +40,8 @@ test_screen_content = ft.Column(
         )
     ],
     alignment=ft.MainAxisAlignment.START,
-    expand=True
+    expand=True,
+    spacing=20
 )
 
 
@@ -108,7 +112,8 @@ class Test:
                     alignment=ft.MainAxisAlignment.CENTER
                 )
             ],
-            expand=True
+            expand=True,
+            spacing=20
         )
 
     def create_question_page(self, navigate_to: callable = None):
@@ -192,7 +197,8 @@ class Test:
                 question_card,
                 navigation_controls
             ],
-            expand=True
+            expand=True,
+            spacing=20
         )
 
     def create_result_page(self, navigate_to: callable = None):
@@ -226,7 +232,7 @@ class Test:
                     ),
                     bgcolor=colors["Dark"]["background"],
                 )
-            ], expand=True
+            ], expand=True, spacing=20
         )
 
     def save_answer(self, answer):
@@ -287,7 +293,7 @@ class Course:
                     alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
                 )
             ],
-            expand=True
+            expand=True, spacing=20
         )
         return page
 
@@ -328,14 +334,14 @@ class Course:
                 )
             ],
             alignment=ft.MainAxisAlignment.START,
-            expand=True
+            expand=True, spacing=20
         )
 
         return page
 
     @staticmethod
     def third_page(navigate_to: callable) -> ft.Column:
-        page = ft.Column(
+        page = ft.ListView(
             controls=[
                 ft.Text(
                     'В демо версии приложения недоступен плеер', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
@@ -360,6 +366,150 @@ class Course:
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 )
-            ], expand=True
+            ], expand=True, padding=20, spacing=20
+        )
+        return page
+
+
+class Prizes:
+    @staticmethod
+    def first_page(navigate_to: callable) -> ft.Column:
+        page = ft.ListView(
+            controls=[
+                ft.Text(
+                    'Меняй знания на мерч Т-образование', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Text(
+                    'Брендированная продукция', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Row(
+                    controls=[
+                        ft.ElevatedButton(
+                            text="Подробнее",
+                            on_click=lambda e: navigate_to(
+                                Prizes.prize_page(navigate_to)),
+                        )
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/prize.png",
+                    width=600, height=300
+                ),
+                ft.Text(
+                    'Проходи курсы и обменивай баллы на мерч Т-образование', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER
+
+                ),
+                ft.Text(
+                    'Стикеры', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Text(
+                    '57-66 баллов', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/stickers.png",
+                    width=700, height=300
+                ),
+                ft.Row(
+                    controls=[
+                        ft.ElevatedButton(
+                            text="Обменять",
+                            on_click=lambda e: navigate_to(
+                                Prizes.prize_page(navigate_to)),
+                        )
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                ),
+                ft.Text(
+                    'Подушка', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Text(
+                    '67-73 баллов', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/pillow.png",
+                    width=600, height=300
+                ),
+                ft.Row(
+                    controls=[
+                        ft.ElevatedButton(
+                            text="Обменять",
+                            on_click=lambda e: navigate_to(
+                                Prizes.prize_page(navigate_to)),
+                        )
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                ),
+                ft.Text(
+                    'Термокружка', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Text(
+                    '74-82 баллов', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/pot.png",
+                    width=600, height=300
+                ),
+                ft.Row(
+                    controls=[
+                        ft.ElevatedButton(
+                            text="Обменять",
+                            on_click=lambda e: navigate_to(
+                                Prizes.prize_page(navigate_to)),
+                        )
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER
+                ),
+
+            ], expand=True, padding=20, spacing=20
+        )
+        return page
+
+    @staticmethod
+    def prize_page(navigate_to: callable) -> ft.Column:
+        page = ft.ListView(
+            controls=[
+                ft.Text(
+                    'Как получить баллы?', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Text(
+                    'Просматривая занятия и вовремя выполняя задания, вы можете получить баллы.', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/money.png",
+                    width=600, height=300
+                ),
+                ft.Text(
+                    'Где посмотреть количество баллов?', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Text(
+                    'Количество баллов и курс обмена вы можете посмотреть  в разделе “Достижения”.', size=20, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Medium', text_align=ft.TextAlign.CENTER
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/points.png",
+                    width=600, height=300
+                ),
+                ft.Text(
+                    'Как обменять баллы на  мерч от Т-образование?', size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                    font_family='Tinkoff Sans Bold', text_align=ft.TextAlign.CENTER,
+                ),
+                ft.Image(
+                    src=f"{BASE_DIR}/static/questions.png",
+                    width=600, height=600
+                ),
+            ], expand=True, padding=20, spacing=20
         )
         return page
