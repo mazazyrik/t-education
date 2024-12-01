@@ -1,4 +1,6 @@
 # flake8: noqa
+import json
+import os
 import flet as ft
 from config import BASE_DIR
 from config import questions as qs
@@ -43,6 +45,120 @@ test_screen_content = ft.Column(
     expand=True,
     spacing=20
 )
+
+first_name_field = ft.TextField(value="Введите имя", width=200)
+second_name_field = ft.TextField(value="Введите фамилию", width=200)
+patronymic_field = ft.TextField(value="Введите отчество", width=200)
+email_field = ft.TextField(value="Введите почту", width=200)
+phone_field = ft.TextField(value="Введите телефон", width=200)
+
+
+personal_cabinet_screen = ft.Column(
+    controls=[
+        ft.Row(
+            controls=[ft.Text(
+                "Личный кабинет", size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                font_family='Tinkoff Sans Bold')],
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=10
+        ),
+        ft.Text(
+            "Измените свои данные ниже:", color=colors["Dark"]["text"],
+            font_family='Tinkoff Sans Medium', size=20, text_align=ft.TextAlign.CENTER),
+
+        ft.Column(
+            controls=[
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Имя:", color=colors["Dark"]["text"], font_family='Tinkoff Sans Medium'),
+                        first_name_field
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    spacing=10
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Фамилия:", color=colors["Dark"]["text"], font_family='Tinkoff Sans Medium'),
+                        second_name_field
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    spacing=10
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Отчество:", color=colors["Dark"]["text"], font_family='Tinkoff Sans Medium'),
+                        patronymic_field
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    spacing=10
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Почта:", color=colors["Dark"]["text"], font_family='Tinkoff Sans Medium'),
+                        email_field
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    spacing=10
+                ),
+                ft.Row(
+                    controls=[
+                        ft.Text(
+                            "Телефон:", color=colors["Dark"]["text"], font_family='Tinkoff Sans Medium'),
+                        phone_field
+                    ],
+                    alignment=ft.MainAxisAlignment.START,
+                    spacing=10
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            spacing=20
+        ),
+
+        ft.Row(
+            controls=[
+                ft.ElevatedButton("Сохранить изменения",
+                                  on_click=lambda e: save_changes()),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER,
+            spacing=10
+        )
+    ],
+    alignment=ft.MainAxisAlignment.START,
+    expand=True,
+    spacing=20
+)
+
+
+def save_changes():
+    user_data = {
+        "first_name": first_name_field.value,
+        "second_name": second_name_field.value,
+        "patronymic": patronymic_field.value,
+        "email": email_field.value,
+        "phone": phone_field.value
+    }
+
+    filename = 'users.json'
+
+    if os.path.exists(filename):
+        with open(filename, 'r') as file:
+            users = json.load(file)
+    else:
+        users = []
+
+    for user in users:
+        if user['email'] == user_data['email']:
+            user.update(user_data)
+            break
+    else:
+        users.append(user_data)
+
+    with open(filename, 'w') as file:
+        json.dump(users, file, indent=4)
 
 
 class Test:

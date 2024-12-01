@@ -1,10 +1,15 @@
 # flake8: noqa
+from venv import create
 import flet as ft
 import time
 
 from style import colors
 from config import BASE_DIR, questions
-from pages import Prizes, Test, list_view_index, test_screen_content, Course
+from pages import (
+    Prizes, Test, test_screen_content, 
+    Course, personal_cabinet_screen
+)
+from utils import main_column
 
 
 class MainApp:
@@ -27,6 +32,7 @@ class MainApp:
         self.bottom_nav = self.create_bottom_nav()
         self.course_screen = self.create_course_screen()
         self.prizes_screen = self.create_prizes_screen()
+        self.personal_cabinet_screen = self.create_personal_cabinet_screen()
 
         self.page.add(self.loading_screen)
         self.page.update()
@@ -50,7 +56,8 @@ class MainApp:
 
     def create_main_screen(self):
         return ft.Container(
-            content=list_view_index,
+            content=main_column,
+            # spacing=20,
             bgcolor=self.theme["background"],
             expand=True
         )
@@ -71,6 +78,13 @@ class MainApp:
     def create_prizes_screen(self):
         return ft.Container(
             content=Prizes.first_page(self.navigate_to),
+            bgcolor=self.theme['background'],
+            expand=True
+        )
+
+    def create_personal_cabinet_screen(self):
+        return ft.Container(
+            content=personal_cabinet_screen,
             bgcolor=self.theme['background'],
             expand=True
         )
@@ -177,6 +191,25 @@ class MainApp:
                             )
                         ]
                     ),
+                    ft.Row(
+                        controls=[
+                            ft.Container(
+                                content=ft.Column(
+                                    controls=[
+                                        ft.Image(
+                                            src=f"{BASE_DIR}/static/info.svg", width=34, height=34,
+                                        ),
+                                        # ft.Text("Информация", size=12, color=self.theme["text"]),
+                                    ],
+                                    alignment=ft.MainAxisAlignment.CENTER,
+                                    spacing=5,
+                                ),
+                                padding=5,
+                                on_click=lambda e: self.on_navigation_change(
+                                    5),
+                            )
+                        ]
+                    ),
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY,
                 spacing=50,
@@ -219,6 +252,8 @@ class MainApp:
             self.show_screen(self.course_screen)
         elif selected_index == 4:
             self.show_screen(self.prizes_screen)
+        elif selected_index == 5:
+            self.show_screen(self.personal_cabinet_screen)
 
 
 def main(page: ft.Page):
@@ -227,7 +262,7 @@ def main(page: ft.Page):
 
 ft.app(target=main)
 
-# Вот и всё… Неплохая получилась история. 
+# Вот и всё… Неплохая получилась история.
 # Интересная, весёлая, порой немного грустная, а главное – поучительная…
 # Она научила нас быть смелыми и не бояться вызовов, которые готовит нам жизнь.
 # Помогала нам добиваться поставленных целей несмотря ни на что. И самое важное –

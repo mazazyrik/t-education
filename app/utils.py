@@ -43,16 +43,7 @@ def create_card_for_index(title, description, image_path, link=None):
     )
 
 
-controls_for_index = [
-    ft.Text("Т-Образование", size=26, weight=ft.FontWeight.BOLD,
-            color=colors["Dark"]["text"], text_align=ft.TextAlign.CENTER, font_family='Tinkoff Sans Bold'),
-    ft.Text(
-        "Бесплатные образовательные программы для школьников, студентов и ИТ-специалистов",
-        color=colors["Dark"]["text"],
-        text_align=ft.TextAlign.CENTER,
-        font_family='Tinkoff Sans Medium',
-        size=20
-    ),
+courses = [
     create_card_for_index(
         "Т‑Банк Финтех",
         "Образовательные ИТ-курсы от топ-менеджеров, техлидов и ведущих специалистов Т‑Банка",
@@ -91,7 +82,6 @@ controls_for_index = [
     ),
 ]
 
-
 courses_list = [
     create_card_for_index(
         "Т-Банк Финтех",
@@ -129,4 +119,38 @@ courses_list = [
         f"{BASE_DIR}/static/math.webp",
         'https://education.tbank.ru/school/basic/math/'
     ),
+] + courses
+
+search_field = ft.TextField(
+    label="Поиск курсов", on_change=lambda e: filter_courses(e.control.value))
+controls_for_index = [
+    ft.Text("Т-Образование", size=26, weight=ft.FontWeight.BOLD,
+            color=colors["Dark"]["text"], text_align=ft.TextAlign.CENTER, font_family='Tinkoff Sans Bold'),
+    ft.Text(
+        "Бесплатные образовательные программы для школьников, студентов и ИТ-специалистов",
+        color=colors["Dark"]["text"],
+        text_align=ft.TextAlign.CENTER,
+        font_family='Tinkoff Sans Medium',
+        size=20
+    ),
+    search_field
 ]
+
+courses_container = ft.Column()
+
+
+def filter_courses(query):
+    courses_container.controls.clear()
+    filtered_courses = [
+        course for course in courses_list
+        if query.lower() in course.content.controls[1].content.controls[0].value.lower()
+    ]
+    courses_container.controls.extend(filtered_courses)
+    courses_container.update()
+
+
+courses_container.controls.extend(courses_list)
+
+main_column = ft.ListView(
+    controls=controls_for_index + [courses_container],
+)
