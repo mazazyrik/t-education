@@ -19,29 +19,65 @@ list_view_index = ft.ListView(
     spacing=20
 
 )
-test_screen_content = ft.Column(
+test_screen_content = ft.ListView(
     controls=[
         ft.Row(
             controls=[ft.Text(
-                "Тестовый экран", size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
+                "Команда крутых ребят", size=26, weight=ft.FontWeight.BOLD, color=colors["Dark"]["text"],
                 font_family='Tinkoff Sans Bold')],
             alignment=ft.MainAxisAlignment.CENTER,
             spacing=10
         ),
         ft.Text(
-            "Здесь может быть ваш контент для тестового экрана.", color=colors["Dark"]["text"],
+            "Над разработкой прототипа приложения Т-Образование работали:", color=colors["Dark"]["text"],
             font_family='Tinkoff Sans Medium', size=20, text_align=ft.TextAlign.CENTER),
         ft.Row(
             controls=[
                 ft.Image(
-                    src=f"{BASE_DIR}/static/bigboss.jpg",
-                    width=500, height=500
+                    src=f"{BASE_DIR}/static/first.png",
+                    width=470, height=220
                 ),
             ],
             alignment=ft.MainAxisAlignment.CENTER
-        )
+        ),
+        ft.Row(
+            controls=[
+                ft.Image(
+                    src=f"{BASE_DIR}/static/sec.png",
+                    width=470, height=220
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
+        ft.Row(
+            controls=[
+                ft.Image(
+                    src=f"{BASE_DIR}/static/third.png",
+                    width=470, height=220
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
+        ft.Row(
+            controls=[
+                ft.Image(
+                    src=f"{BASE_DIR}/static/fifth.png",
+                    width=470, height=220
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
+        ft.Row(
+            controls=[
+                ft.Image(
+                    src=f"{BASE_DIR}/static/bottom.png",
+                    width=470, height=220
+                ),
+            ],
+            alignment=ft.MainAxisAlignment.CENTER
+        ),
     ],
-    alignment=ft.MainAxisAlignment.START,
+    # alignment=ft.MainAxisAlignment.START,
     expand=True,
     spacing=20
 )

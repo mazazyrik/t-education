@@ -197,7 +197,7 @@ class MainApp:
                                 content=ft.Column(
                                     controls=[
                                         ft.Image(
-                                            src=f"{BASE_DIR}/static/info.svg", width=34, height=34,
+                                            src=f"{BASE_DIR}/static/lk.png", width=34, height=34,
                                         ),
                                         # ft.Text("Информация", size=12, color=self.theme["text"]),
                                     ],
