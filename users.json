@@ -12,5 +12,12 @@
         "patronymic": "fd",
         "email": "sfdf`",
         "phone": "fdf"
+    },
+    {
+        "first_name": "\u043c\u0438\u0445\u0430\u0438\u043b",
+        "second_name": "\u0437\u0443\u0431\u0435\u043d\u043a\u043e",
+        "patronymic": "\u043f\u0435\u0442\u0440\u043e\u0432\u0438\u0447",
+        "email": "\u0444",
+        "phone": "6743675"
     }
 ]
